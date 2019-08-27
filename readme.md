@@ -2,8 +2,6 @@
 
 ##Introduction
 
-hilbert.hpp was developed by David Beynon (dave at spectral3d dot co dot uk), and is released under the MIT license.
-
 hilbert.hpp contains two implementations of the hilbert curve encoding &
 decoding algorithm described by John Skilling in his paper "Programming the
 Hilbert Curve".
