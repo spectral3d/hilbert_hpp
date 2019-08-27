@@ -1,6 +1,6 @@
-#hilbert.hpp
+# hilbert.hpp
 
-##Introduction
+## Introduction
 
 hilbert.hpp contains two implementations of the hilbert curve encoding &
 decoding algorithm described by John Skilling in his paper "Programming the
@@ -31,11 +31,11 @@ v1 took 23182 ms
 v2 took 9387 ms
 ~~~~
 
-##Building
+## Building
 
 This is a header only library.  Simply add `#include "hilbert.hpp"` to your code and use it.
 
-##Interface
+## Interface
 
 Two functions are supported:
 
