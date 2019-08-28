@@ -100,7 +100,7 @@ namespace hilbert
             UntransposeBits(std::array<T, N> const &in)
             {
                 const size_t bits = std::numeric_limits<T>::digits;
-                const T high_bit(1 << (bits - 1));
+                const T high_bit(T(1) << (bits - 1));
                 const size_t bit_count(bits * N);
 
                 std::array<T, N> out;
@@ -136,7 +136,7 @@ namespace hilbert
             TransposeBits(std::array<T, N> const &in)
             {
                 const size_t bits = std::numeric_limits<T>::digits;
-                const T high_bit(1 << (bits - 1));
+                const T high_bit(T(1) << (bits - 1));
                 const size_t bit_count(bits * N);
 
                 std::array<T, N> out;
@@ -238,7 +238,7 @@ namespace hilbert
 
             // reverse transforms to convert into transposed gray code.
             {
-                T cur_bit(1 << (bits - 1)),
+                T cur_bit(T(1) << (bits - 1)),
                   low_bits;
 
                 do
@@ -267,7 +267,7 @@ namespace hilbert
 
             // Remove gray code from transposed vector.
             {
-                T cur_bit(1 << (bits - 1)),
+                T cur_bit(T(1) << (bits - 1)),
                   t(0);
 
                 for(size_t n=1;n<N;n++)
@@ -329,7 +329,8 @@ namespace hilbert
                          size - (1+((D + ((size - B) * N)) % size));
                     const size_t dst_bit(B - 1);
 
-                    T bit = ((in[src] & (1 << src_bit)) >> src_bit) << dst_bit;
+                    T bit = ((in[src] & (T(1) << src_bit)) >> src_bit) <<
+                            dst_bit;
 
                     return bit + TransposeBits2(
                         in,
@@ -390,7 +391,8 @@ namespace hilbert
                         size - (((((D * size) + (size - B))) / N) + 1);
                     const size_t dst_bit(B - 1);
 
-                    T bit = ((in[src] & (1 << src_bit)) >> src_bit) << dst_bit;
+                    T bit = ((in[src] & (T(1) << src_bit)) >> src_bit) <<
+                            dst_bit;
 
                     return bit + UntransposeBits2(
                         in,
@@ -461,7 +463,7 @@ namespace hilbert
                 {
                 }
 
-                // xor array balues with previous values.
+                // xor array values with previous values.
                 template<typename T, size_t N, size_t D>
                 void
                 RemoveGrayCode1(
@@ -485,7 +487,7 @@ namespace hilbert
                 template<typename T, size_t B>
                 T RemoveGrayCode2(T v, std::integral_constant<size_t, B>)
                 {
-                    const T cur_bit(1 << (B-1));
+                    const T cur_bit(T(1) << (B-1));
                     const T low_bits(cur_bit - 1);
 
                     if(v & cur_bit)
@@ -519,7 +521,7 @@ namespace hilbert
                         std::integral_constant<size_t, I>)
                 {
                     const size_t n(I-1);
-                    const T cur_bit(1 << (std::numeric_limits<T>::digits - B));
+                    const T cur_bit(T(1) << (std::numeric_limits<T>::digits - B));
                     const T low_bits(cur_bit - 1);
 
                     if(out[n] & cur_bit)
@@ -579,7 +581,7 @@ namespace hilbert
                         std::integral_constant<size_t, B>,
                         std::integral_constant<size_t, I>)
                 {
-                    const size_t cur_bit(1<<B);
+                    const size_t cur_bit(T(1) << B);
                     const size_t low_bits(cur_bit-1);
                     const size_t n(N-I);
 
