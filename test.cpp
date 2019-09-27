@@ -3,6 +3,8 @@
 #include <chrono>
 
 // Test functions to encode & decode 8-bit 3D values.
+
+// Convert 24 bit index to 8 bit 3D position using v1.
 std::array<uint8_t, 3>
 IndexToPosition3D8BV1(uint32_t idx)
 {
@@ -15,6 +17,7 @@ IndexToPosition3D8BV1(uint32_t idx)
     return hilbert::v1::IndexToPosition(tmp);
 }
 
+// Convert 8 bit 3D position to 24 bit index using v1.
 uint32_t
 PositionToIndex3D8BV1(std::array<uint8_t, 3> const &pos)
 {
@@ -26,6 +29,7 @@ PositionToIndex3D8BV1(std::array<uint8_t, 3> const &pos)
     return idx;
 }
 
+// Convert 24 bit index to 8 bit 3D position using v2.
 std::array<uint8_t, 3>
 IndexToPosition3D8BV2(uint32_t idx)
 {
@@ -38,6 +42,7 @@ IndexToPosition3D8BV2(uint32_t idx)
     return hilbert::v2::IndexToPosition(tmp);
 }
 
+// Convert 8 bit 3D position to 24 bit index using v2.
 uint32_t
 PositionToIndex3D8BV2(std::array<uint8_t, 3> const &pos)
 {
@@ -56,13 +61,15 @@ int main(int, char **)
 
     std::chrono::high_resolution_clock clock;
 
-    printf("Timing: running 10 * 2^24 encode/decode operations with v1 & v2.\n");
+    printf("Timing: 10 * 2^24 encode/decode operations with v1 & v2.\n");
     printf("This may take some time.\n\n");
 
     auto t0 = clock.now();
+
     // Time encoding & decoding with V1.
     for(uint32_t n=0;n<10;n++)
     {
+        // Encode and decode all 2^24 combinations of 8 bit 3D positions.
         for(uint32_t i=0;i<(1<<24);i++)
         {
             tmp = IndexToPosition3D8BV1(i);
@@ -75,6 +82,7 @@ int main(int, char **)
     // Time encoding & decoding with V2.
     for(uint32_t n=0;n<10;n++)
     {
+        // Encode and decode all 2^24 combinations of 8 bit 3D positions.
         for(uint32_t i=0;i<(1<<24);i++)
         {
             tmp = IndexToPosition3D8BV2(i);
@@ -82,6 +90,7 @@ int main(int, char **)
         }
     }
 
+    // Dump timings.
     auto t2 = clock.now();
 
     auto d0 = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
@@ -92,6 +101,8 @@ int main(int, char **)
 
     printf("\n");
 
+    // Ensure that all 2^24 8 bit 3D positions are treated consistently by
+    // v1 and v2.
     {
         printf("Consistency check.  Encode with v1, decode with v1\n");
         bool consistent(true);
