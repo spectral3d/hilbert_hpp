@@ -28,7 +28,7 @@
 #include <limits>
 #include <type_traits>
 
-// Version 1.0 - 27 August 2019
+// Version 1.1 - 29 August 2019
 
 //
 // N dimensional hilbert curve encoding & decoding based on the paper
@@ -313,7 +313,7 @@ namespace hilbert
                         std::integral_constant<size_t, D>,
                         std::integral_constant<size_t, 0>)
                 {
-                    return 0;
+                    return T(0);
                 }
 
                 template<typename T, size_t N, size_t D, size_t B>
@@ -375,7 +375,7 @@ namespace hilbert
                         std::integral_constant<size_t, D>,
                         std::integral_constant<size_t, 0>)
                 {
-                    return 0;
+                    return T(0);
                 }
 
                 template<typename T, size_t N, size_t D, size_t B>
@@ -481,7 +481,7 @@ namespace hilbert
                 template<typename T>
                 T RemoveGrayCode2(T, std::integral_constant<size_t, 1>)
                 {
-                    return 0;
+                    return T(0);
                 }
 
                 template<typename T, size_t B>
@@ -776,7 +776,6 @@ namespace hilbert
 
                 return out;
             }
-
         }
 
         //
