@@ -309,7 +309,7 @@ namespace hilbert
                 template<typename T, size_t N, size_t D>
                 T
                 TransposeBits2(
-                        std::array<T, N> const &in,
+                        std::array<T, N> const &,
                         std::integral_constant<size_t, D>,
                         std::integral_constant<size_t, 0>)
                 {
@@ -371,7 +371,7 @@ namespace hilbert
                 template<typename T, size_t N, size_t D>
                 T
                 UntransposeBits2(
-                        std::array<T, N> const &in,
+                        std::array<T, N> const &,
                         std::integral_constant<size_t, D>,
                         std::integral_constant<size_t, 0>)
                 {
@@ -507,7 +507,7 @@ namespace hilbert
                 template<typename T, size_t N, size_t B>
                 void
                 GrayToHilbert2(
-                        std::array<T, N> &out,
+                        std::array<T, N> &,
                         std::integral_constant<size_t, B>,
                         std::integral_constant<size_t, 0>)
                 {
@@ -546,7 +546,7 @@ namespace hilbert
                 template<typename T, size_t N>
                 void
                 GrayToHilbert(
-                        std::array<T, N> &out,
+                        std::array<T, N> &,
                         std::integral_constant<size_t, 0>)
                 {
                 }
