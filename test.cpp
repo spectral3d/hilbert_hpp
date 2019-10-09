@@ -4,6 +4,18 @@
 
 // Test functions to encode & decode 8-bit 3D values.
 
+std::array<uint8_t, 3>
+IndexToPosition3D8BV1(uint32_t idx);
+
+std::array<uint8_t, 3>
+IndexToPosition3D8BV2(uint32_t idx);
+
+uint32_t
+PositionToIndex3D8BV1(std::array<uint8_t, 3> const &pos);
+
+uint32_t
+PositionToIndex3D8BV2(std::array<uint8_t, 3> const &pos);
+
 // Convert 24 bit index to 8 bit 3D position using v1.
 std::array<uint8_t, 3>
 IndexToPosition3D8BV1(uint32_t idx)
