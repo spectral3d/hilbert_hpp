@@ -335,7 +335,7 @@ namespace hilbert
                     const size_t dst_bit = (B - 1);
                     const T dst_bit_val = T(1) << dst_bit;
 
-                    // Multiply rather than shift to avoid clang implicit 
+                    // Multiply rather than shift to avoid clang implicit
                     // conversion warning.
                     T bit = ((in[src] & src_bit_val) >> src_bit) * dst_bit_val;
 
@@ -400,7 +400,7 @@ namespace hilbert
                     const size_t dst_bit(B - 1);
                     const T dst_bit_val = T(1) << dst_bit;
 
-                    // Multiply rather than shift to avoid clang implicit 
+                    // Multiply rather than shift to avoid clang implicit
                     // conversion warning.
                     T bit = ((in[src] & src_bit_val) >> src_bit) * dst_bit_val;
 

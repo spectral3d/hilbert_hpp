@@ -88,7 +88,7 @@ int main(int, char **)
             tmp2 = PositionToIndex3D8BV1(tmp);
         }
     }
-    
+
     auto t1 = clock.now();
 
     // Time encoding & decoding with V2.
