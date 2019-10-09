@@ -199,8 +199,9 @@ namespace hilbert
                 {
                     low_bits = cur_bit - 1;
 
-                    for(int n=int(N-1);n>=0;n--)
+                    for(size_t i=1;i<=N;i++)
                     {
+                        auto n = N-i;
                         if(out[n] & cur_bit)
                         {
                             // flip low bits of X
@@ -327,10 +328,11 @@ namespace hilbert
                     const size_t src = ((D + ((size - B) * N)) / size);
                     const size_t src_bit =
                          size - (1+((D + ((size - B) * N)) % size));
-                    const size_t dst_bit(B - 1);
+                    const T src_bit_val = T(1) << src_bit;
+                    const size_t dst_bit = (B - 1);
+                    const T dst_bit_val = T(1) << dst_bit;
 
-                    T bit = ((in[src] & (T(1) << src_bit)) >> src_bit) <<
-                            dst_bit;
+                    T bit = ((in[src] & src_bit_val) >> src_bit) * dst_bit_val;
 
                     return bit + TransposeBits2(
                         in,
@@ -389,10 +391,11 @@ namespace hilbert
                     const size_t src = ((D * size) + (size - B)) % N;
                     const size_t src_bit =
                         size - (((((D * size) + (size - B))) / N) + 1);
+                    const T src_bit_val = T(1) << src_bit;
                     const size_t dst_bit(B - 1);
+                    const T dst_bit_val = T(1) << dst_bit;
 
-                    T bit = ((in[src] & (T(1) << src_bit)) >> src_bit) <<
-                            dst_bit;
+                    T bit = ((in[src] & src_bit_val) >> src_bit) * dst_bit_val;
 
                     return bit + UntransposeBits2(
                         in,
