@@ -199,9 +199,11 @@ namespace hilbert
                 {
                     low_bits = cur_bit - 1;
 
-                    for(size_t i=1;i<=N;i++)
+                    size_t n(N);
+
+                    do
                     {
-                        auto n = N-i;
+                        n--;
                         if(out[n] & cur_bit)
                         {
                             // flip low bits of X
@@ -215,6 +217,7 @@ namespace hilbert
                             out[0]^= t;
                         }
                     }
+                    while(n);
 
                     cur_bit<<= 1;
                 }
