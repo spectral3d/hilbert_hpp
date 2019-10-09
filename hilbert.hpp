@@ -330,11 +330,13 @@ namespace hilbert
                     const size_t size = std::numeric_limits<T>::digits;
                     const size_t src = ((D + ((size - B) * N)) / size);
                     const size_t src_bit =
-                         size - (1+((D + ((size - B) * N)) % size));
+                            size - (1+((D + ((size - B) * N)) % size));
                     const T src_bit_val = T(1) << src_bit;
                     const size_t dst_bit = (B - 1);
                     const T dst_bit_val = T(1) << dst_bit;
 
+                    // Multiply rather than shift to avoid clang implicit 
+                    // conversion warning.
                     T bit = ((in[src] & src_bit_val) >> src_bit) * dst_bit_val;
 
                     return bit + TransposeBits2(
@@ -393,11 +395,13 @@ namespace hilbert
                     const size_t size = std::numeric_limits<T>::digits;
                     const size_t src = ((D * size) + (size - B)) % N;
                     const size_t src_bit =
-                        size - (((((D * size) + (size - B))) / N) + 1);
+                            size - (((((D * size) + (size - B))) / N) + 1);
                     const T src_bit_val = T(1) << src_bit;
                     const size_t dst_bit(B - 1);
                     const T dst_bit_val = T(1) << dst_bit;
 
+                    // Multiply rather than shift to avoid clang implicit 
+                    // conversion warning.
                     T bit = ((in[src] & src_bit_val) >> src_bit) * dst_bit_val;
 
                     return bit + UntransposeBits2(
